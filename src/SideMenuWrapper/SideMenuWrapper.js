@@ -6,7 +6,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from 'axios';
 
-const SideMenuWrapper = ({ style, onLayer,layer,dates }) => {
+const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date }) => {
 
 
   const handleSelect=(e)=>{
@@ -27,7 +27,8 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates }) => {
             id="dropdown-button-dark-example2"
             variant="secondary"
             menuVariant="dark"
-            title="Selecciona una Fecha"
+            // title="Selecciona una Fecha"
+            title={actual_date}
             className="mt-2"
             size= 'sm'
             onSelect={(event) => style(event)}

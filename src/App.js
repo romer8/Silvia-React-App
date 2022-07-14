@@ -122,6 +122,7 @@ const getStyle = (feature) => {
           onLayer = { onOffLayer}
           layer = {showLayer1}
           dates = {datesFlood}
+          actual_date={actualDate}
 
         />
 
