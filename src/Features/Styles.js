@@ -35,7 +35,7 @@ export default {
       width: 1,
     }),
     fill: new Fill({
-      color: "rgba(0, 0, 255, 0.1)",
+      color: "rgba(0, 0, 255, 0)",
     }),
   }),
   SecondLevel:new Style({
@@ -44,7 +44,7 @@ export default {
       width: 2,
     }),
     fill: new Fill({
-      color: "rgba(81, 80, 79, 1)",
+      color: "rgba(81, 80, 79, 0)",
     }),
   }),
   ThirdLevel:new Style({
@@ -53,7 +53,7 @@ export default {
       width: 2,
     }),
     fill: new Fill({
-      color: "rgba(81, 80, 79, 1)",
+      color: "rgba(81, 80, 79, 0)",
     }),
   }),
   FourthLevel:new Style({
@@ -62,7 +62,7 @@ export default {
       width: 2,
     }),
     fill: new Fill({
-      color: "rgba(81, 80, 79, 1)",
+      color: "rgba(81, 80, 79, 0)",
     }),
   }),
   
