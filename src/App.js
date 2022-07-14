@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Map from "./Map";
 import { Layers, TileLayer, VectorLayer } from "./Layers";
-import { osm, vector } from "./Source";
+import { osm, vector,xyz } from "./Source";
 import { fromLonLat, get } from "ol/proj";
 import GeoJSON from "ol/format/GeoJSON";
 import TileWMS from 'ol/source/TileWMS';
@@ -127,7 +127,17 @@ const getStyle = (feature) => {
 
         <Map center={fromLonLat(center)} zoom={zoom}>
           <Layers>
-            <TileLayer source={osm()} zIndex={0} />
+            <TileLayer source={xyz(
+              {
+                attributions:
+                'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
+                'rest/services/World_Topo_Map/MapServer">ArcGIS</a>',
+                url:
+                'https://server.arcgisonline.com/ArcGIS/rest/services/' +
+                'World_Imagery/MapServer/tile/{z}/{y}/{x}',
+              }
+            )} zIndex={0} />
+
             <TileLayer 
                 source={new TileWMS({
                   url: 'https://geoserver.hydroshare.org/geoserver/HS-22714855232d44198d12aa4109ec8478/wms',
