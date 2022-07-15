@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import Map from "./Map";
 import { Layers, TileLayer, VectorLayer } from "./Layers";
 import { osm, vector,xyz } from "./Source";
@@ -14,9 +14,7 @@ import "./App.css";
 import axios from 'axios';
 
 import {ContainerFlex} from './styles/ContainerMain.styled'
-// import {SideMenu} from './styles/SideMenu.styled'
 import SideMenuWrapper from "./SideMenuWrapper/SideMenuWrapper";
-import { Tile } from "ol";
 
 
 const App = () => {
@@ -112,6 +110,7 @@ const getStyle = (feature) => {
   }, [])
 
 
+
   return (
     <div>
       {loading && <div>Loading</div>}
@@ -123,31 +122,36 @@ const getStyle = (feature) => {
           layer = {showLayer1}
           dates = {datesFlood}
           actual_date={actualDate}
-
+          opacity_wms = {SetOpacityLayer}
+          wms_op_val = {opacityLayer}
         />
 
         <Map center={fromLonLat(center)} zoom={zoom}>
           <Layers>
-            <TileLayer source={xyz(
-              {
-                attributions:
-                'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
-                'rest/services/World_Topo_Map/MapServer">ArcGIS</a>',
-                url:
-                'https://server.arcgisonline.com/ArcGIS/rest/services/' +
-                'World_Imagery/MapServer/tile/{z}/{y}/{x}',
-              }
-            )} zIndex={0} />
-
             <TileLayer 
-                source={new TileWMS({
-                  url: 'https://geoserver.hydroshare.org/geoserver/HS-22714855232d44198d12aa4109ec8478/wms',
-                  params: { 'LAYERS': 'GEOGLOWS_SilviaV3' },
-                  serverType: 'geoserver',
-                  crossOrigin: 'Anonymous'
-                })} 
-                opacity={opacityLayer}
-              />
+              layerClass={"base_layer"}
+            
+              source={xyz(
+                {
+                  attributions:
+                  'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
+                  'rest/services/World_Topo_Map/MapServer">ArcGIS</a>',
+                  url:
+                  'https://server.arcgisonline.com/ArcGIS/rest/services/' +
+                  'World_Imagery/MapServer/tile/{z}/{y}/{x}',
+                }
+            )} zIndex={0} />
+              <TileLayer 
+              layerClass={"wms_layer"}
+              source={new TileWMS({
+                url: 'https://geoserver.hydroshare.org/geoserver/HS-22714855232d44198d12aa4109ec8478/wms',
+                params: { 'LAYERS': 'GEOGLOWS_SilviaV3' },
+                serverType: 'geoserver',
+                crossOrigin: 'Anonymous'
+              })} 
+              opacity={opacityLayer}
+              zIndex={1}
+            />
             {showLayer1 && (
                 <VectorLayer
                 source={vector({
@@ -158,6 +162,8 @@ const getStyle = (feature) => {
                 style={function(feature){
                   return getStyle(feature)
                 }}
+                zIndex={2}
+
               />
             )}
 

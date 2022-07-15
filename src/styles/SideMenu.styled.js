@@ -1,10 +1,43 @@
 import styled from "styled-components";
 
 export const SideMenu = styled.div`
-    width: 100%;
-    height: 100%;
+    height: fit-content;
     flex:1 1 20%;
     order: 1;
     overflow-y: hidden;
     padding:5px;
+    position:absolute;
+    z-index:300;
+    bottom:0px;
+
+    .wrapper_absolute{
+        width: fit-content;
+        height: fit-content;
+        padding: 20px;
+        background-color:rgba(12, 74, 110, 0.5);        ;
+        border-color: blue;
+        color:#e0f2fe;
+    }
+
+    .mycontainer{
+        display:flex;
+        justify-items:center;
+        padding-top:10px;
+    }
+    .prompt{
+        padding-right:4%;
+    }
+    .slider-parent{
+        position:relative;
+    }
+    .mainContainer{
+        padding-top:20px;
+    }
+    .sudo_title{
+        font-weight: bold;
+    }
+    .slider-parent{
+        padding-left:20px;
+    }
+
 `;

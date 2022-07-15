@@ -12,5 +12,7 @@ export const MapContainer = styled.div`
     flex:1 1 80%;
     order: 1;
     overflow-y: hidden;
+    position:absolute;
+    display:flex;
 
 `;

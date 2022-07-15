@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import MapContext from "../Map/MapContext";
 import VectorLayer from "ol/layer/Vector";
-import { Vector as VectorSource } from 'ol/source';
 
 const VectorLayerWrapper = ({ source, style, zIndex = 0 }) => {
 	const { map } = useContext(MapContext);
-	const [vectorLayerSource, setVectorLayerSource] = useState()
+	const [vectorLayerSource, setVectorLayerSource] = useState();
 
 
 	useEffect(() => {
@@ -43,7 +42,7 @@ const VectorLayerWrapper = ({ source, style, zIndex = 0 }) => {
 	useEffect(() => {
 		console.log("calling it")
 		if (!map) return;
-		map.getView().fit(source.getExtent());
+		// map.getView().fit(source.getExtent());
 		setVectorLayerSource(source)
 
 	  return () => {
