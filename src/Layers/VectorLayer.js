@@ -39,16 +39,16 @@ const VectorLayerWrapper = ({ source, style, zIndex = 0 }) => {
 
 		};
 	}, [map]);
-	useEffect(() => {
-		console.log("calling it")
-		if (!map) return;
-		// map.getView().fit(source.getExtent());
-		setVectorLayerSource(source)
+	// useEffect(() => {
+	// 	console.log("calling it")
+	// 	if (!map) return;
+	// 	// map.getView().fit(source.getExtent());
+	// 	setVectorLayerSource(source)
 
-	  return () => {
+	//   return () => {
 		
-	  }
-	}, [vectorLayerSource])
+	//   }
+	// }, [vectorLayerSource])
 	
 	
 	

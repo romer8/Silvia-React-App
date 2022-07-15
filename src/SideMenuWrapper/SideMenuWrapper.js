@@ -1,22 +1,15 @@
 import React from "react";
-import MapContext from "../Map/MapContext";
 import {SideMenu} from '../styles/SideMenu.styled'
-import { useState, useEffect,useContext } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "bootstrap/dist/css/bootstrap.min.css";
-import axios from 'axios';
 
 const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wms_op_val}) => {
-
-
-	// const { map } = useContext(MapContext);
 
   const opacityHandler = (data) => {
 
     opacity_wms(data);
   }
-
 
   return(
     
@@ -71,10 +64,6 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wm
         </div>
 
         </div>        
-
-
-
-              
 
       </SideMenu>
 

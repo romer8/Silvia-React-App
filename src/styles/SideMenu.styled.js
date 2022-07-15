@@ -39,5 +39,10 @@ export const SideMenu = styled.div`
     .slider-parent{
         padding-left:20px;
     }
+    
+    .dropdown-menu {
+        height: 300px;
+        overflow-y: scroll;
+    }
 
 `;
