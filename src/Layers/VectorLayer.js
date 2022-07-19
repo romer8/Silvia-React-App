@@ -25,9 +25,9 @@ const VectorLayerWrapper = ({ source, style, zIndex = 0 }) => {
 
 		console.log("fitting",typeof(source))
 
-		if(!source){
-			setVectorLayerSource(source)
-		}
+		// if(!source){
+		// 	setVectorLayerSource(source)
+		// }
 		return () => {
 			if (map) {
 				console.log("here removing vector layer")
@@ -38,7 +38,7 @@ const VectorLayerWrapper = ({ source, style, zIndex = 0 }) => {
 
 
 		};
-	}, [map]);
+	}, [map,source]);
 	// useEffect(() => {
 	// 	console.log("calling it")
 	// 	if (!map) return;

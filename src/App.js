@@ -22,9 +22,20 @@ const App = () => {
   const [zoom, setZoom] = useState(mapConfig.zoom);
   const [showLayer1, setShowLayer1] = useState(true);
   const [loading, setLoading] = useState(true);
-  const [floodLayer, setFloodLayer] = useState({});
-  const [datesFlood, setDatesFlood]= useState(['2022-04-17','2022-04-18','2022-04-19','2022-04-20','2022-06-17']);
-  const [actualDate, setActualDate]= useState('2022-04-17');
+  const [floodLayer, setFloodLayer] = useState(
+    {
+      "type": "FeatureCollection",
+      "crs": {
+          "type": "name",
+          "properties": {
+              "name": "EPSG:4326"
+          }
+      },
+      "features": []
+    }
+  );
+  const [datesFlood, setDatesFlood]= useState([]);
+  const [actualDate, setActualDate]= useState('');
   const [opacityLayer, SetOpacityLayer]= useState(0.4);
 
   const changeStyle = (date) =>{
@@ -50,49 +61,10 @@ const getStyle = (feature) => {
     }
     
   }
-
-  useEffect(() => {
-
-    const Mydata = {
-      'date': actualDate
-    }
-    const config = {
-      header: {
-        "Content-Type": "application/json",
-      },
-    };
-    const service_link = 'http://127.0.0.1:8000/apps/silvia/floods/';
-    const fetchDataFlood = async () =>{
-      try {
-        if(loading){
-          const {data: response} = await axios.post(service_link,Mydata,config);
-          console.log("useEffect app.js 1");
-          console.log(response)
-          setFloodLayer(response)
-          setLoading(false);
-          setShowLayer1(true)
-
-        }
-        else{
-          const {data: response} = await axios.post(service_link,Mydata,config);
-          console.log("useEffect app.js 2");
-          console.log(response)
-          setFloodLayer(response)
-          setShowLayer1(true)
-
-        }
-
-      } catch (error) {
-        console.error(error.message);
-      }
-      setLoading(false);
-    }
-    fetchDataFlood();
-
-	}, [actualDate]);
-  
   // Adding the wms layer to the map
   useEffect(() => {
+    console.log("useEffect app.js 3");
+
     const service_link_dates = 'http://127.0.0.1:8000/apps/silvia/dates/';
 
     const fetchDates = async () =>{
@@ -109,7 +81,55 @@ const getStyle = (feature) => {
   
   }, [])
 
+  useEffect(() => {
+    console.log(actualDate);
 
+    const Mydata = {
+      'date': actualDate
+    }
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    const service_link = 'http://127.0.0.1:8000/apps/silvia/floods/';
+    const fetchDataFlood = async () =>{
+      try {
+        if(actualDate !==''){
+          const {data: response} = await axios.post(service_link,Mydata,config);
+          console.log("useEffect app.js 1");
+          console.log(response)
+          setFloodLayer(response)
+          setLoading(false);
+          setShowLayer1(true)
+        }
+
+        // if(loading && actualDate !==''){
+        //   const {data: response} = await axios.post(service_link,Mydata,config);
+        //   console.log("useEffect app.js 1");
+        //   console.log(response)
+        //   setFloodLayer(response)
+        //   setLoading(false);
+        //   setShowLayer1(true)
+        // }
+        // else{
+        //   console.log(Mydata);
+        //   const {data: response} = await axios.post(service_link,Mydata,config);
+        //   console.log("useEffect app.js 2");
+        //   console.log(response)
+        //   setFloodLayer(response)
+        //   setShowLayer1(true)
+        // }
+
+      } catch (error) {
+        console.error(error.message);
+      }
+      setLoading(false);
+    }
+    fetchDataFlood();
+
+	}, [actualDate]);
+  
 
   return (
     <div>
