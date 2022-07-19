@@ -31,7 +31,7 @@ export default {
   }),
   OneLevel:new Style({
     stroke: new Stroke({
-      color: "blue",
+      color: "#101010",
       width: 1,
     }),
     fill: new Fill({
@@ -40,29 +40,29 @@ export default {
   }),
   SecondLevel:new Style({
     stroke: new Stroke({
-      color: "yellow",
+      color: "#101010",
       width: 2,
     }),
     fill: new Fill({
-      color: "rgba(81, 80, 79, 0)",
+      color: "yellow",
     }),
   }),
   ThirdLevel:new Style({
     stroke: new Stroke({
-      color: "orange",
+      color: "#101010",
       width: 2,
     }),
     fill: new Fill({
-      color: "rgba(81, 80, 79, 0)",
+      color: "orange",
     }),
   }),
   FourthLevel:new Style({
     stroke: new Stroke({
-      color: "red",
+      color: "#101010",
       width: 2,
     }),
     fill: new Fill({
-      color: "rgba(81, 80, 79, 0)",
+      color: "red",
     }),
   }),
   

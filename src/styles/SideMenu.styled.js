@@ -41,7 +41,7 @@ export const SideMenu = styled.div`
     }
     
     .dropdown-menu {
-        height: 300px;
+        height: 100px;
         overflow-y: scroll;
     }
 
