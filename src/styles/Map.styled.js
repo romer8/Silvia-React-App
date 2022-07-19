@@ -4,7 +4,6 @@ export const MapContainer = styled.div`
     & .ol-map{
         width: 100%;
         height: 100%;
-        margin: 5px;
         width: 100%;
     }
     width: 100%;
