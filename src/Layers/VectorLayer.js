@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import MapContext from "../Map/MapContext";
 import VectorLayer from "ol/layer/Vector";
 
 const VectorLayerWrapper = ({ source, style, zIndex = 0 }) => {
 	const { map } = useContext(MapContext);
-	const [vectorLayerSource, setVectorLayerSource] = useState();
+	// const [vectorLayerSource, setVectorLayerSource] = useState();
 
 
 	useEffect(() => {

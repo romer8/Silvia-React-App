@@ -43,6 +43,18 @@ export const SideMenu = styled.div`
     .dropdown-menu {
         height: 100px;
         overflow-y: scroll;
+        font-size:1.5rem;
+    }
+    .dropdown-toggle {
+        font-size:1.5rem;
+    }
+    .span_div{
+        font-size: 14px;
+        color: #666;
+        font-weight: 400;
+        letter-spacing: .5px;
+        padding-left:10px;
+        color:#e0f2fe;
     }
 
 `;

@@ -1,7 +1,7 @@
-import React, { useState, useEffect,useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Map from "./Map";
 import { Layers, TileLayer, VectorLayer } from "./Layers";
-import { osm, vector,xyz } from "./Source";
+import { vector,xyz } from "./Source";
 import { fromLonLat, get } from "ol/proj";
 import GeoJSON from "ol/format/GeoJSON";
 import TileWMS from 'ol/source/TileWMS';
@@ -50,13 +50,13 @@ const App = () => {
 const getStyle = (feature) => {
     const floodindex = feature.get('flood');
 
-    if(floodindex == 2){
+    if(floodindex === 2){
       return FeatureStyles.SecondLevel
     }
-    if(floodindex == 3){
+    if(floodindex === 3){
       return FeatureStyles.ThirdLevel
     }
-    if(floodindex == 4){
+    if(floodindex === 4){
       return FeatureStyles.FourthLevel
     }
     

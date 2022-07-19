@@ -20,14 +20,14 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wm
         </p>
         <div className="mycontainer">
           
-          <p className="prompt">Select Dates</p>
+          <p className="prompt">Select Date</p>
           <DropdownButton 
             id="dropdown-button-dark-example2"
             variant="secondary"
             menuVariant="dark"
             title={actual_date}
             // className="mt-2"
-            size= 'sm'
+            size= 'lg'
             onSelect={(event) => style(event)}
           >
           {dates.map((date, index) => (
