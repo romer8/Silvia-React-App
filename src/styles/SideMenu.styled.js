@@ -17,6 +17,7 @@ export const SideMenu = styled.div`
         background-color:rgba(12, 74, 110, 0.5);        ;
         border-color: blue;
         color:#e0f2fe;
+        font-size:1.5rem;
     }
 
     .mycontainer{
