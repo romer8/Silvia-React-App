@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Map from "./Map";
+
+import Modal from "./Modals/modal";
+
 import { Layers, TileLayer, VectorLayer } from "./Layers";
 import { vector,xyz } from "./Source";
 import { fromLonLat, get } from "ol/proj";
@@ -18,6 +21,7 @@ import SideMenuWrapper from "./SideMenuWrapper/SideMenuWrapper";
 
 
 const App = () => {
+  const modal = useRef(null);
   const [center, setCenter] = useState(mapConfig.center);
   const [zoom, setZoom] = useState(mapConfig.zoom);
   const [showLayer1, setShowLayer1] = useState(true);
@@ -231,8 +235,33 @@ const getStyle = (feature) => {
 
 
       </ContainerFlex>
-    )}
+        )}
+      <Modal 
+        ref={modal}
+        defaultOpened ={true}
+        >
+          <div>
+            <h4>
+              Terminos de Uso
+            </h4>
+            <br></br>
+          </div>
+          <div>
+            <p>
+            Este producto contiene estimaciones de potenciales movimientos en masa a nivel
+            nacional. 
+            </p>
+            <p>
+            El uso del portal se realizará bajo la única y exclusiva responsabilidad del
+            usuario.
+            </p>
+            <p>
+            Mayor información en el siguiente <a></a> <a href="https://www.senamhi.gob.pe/?p=monitoreo-silvia">Enlace</a>
+            </p>
 
+          </div>
+
+      </Modal>
     </div>
   );
 };

@@ -28,7 +28,7 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wm
         </p>
         <div className="mycontainer">
           
-          <p className="prompt">Select Date</p>
+          <p className="prompt">Event Date</p>
           <DropdownButton 
             id="dropdown-button-dark-example2"
             variant="secondary"
@@ -48,12 +48,12 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wm
           type="checkbox"
           checked={layer}
           onChange={(event) => onLayer(event)}
-          className="input_name"
+          className="cm-toggle"
         /> 
         <span>Hide/show</span>
 
         <div className="mycontainer">
-          <p className="prompt">Contrast</p>
+          <p className="prompt">Opacity</p>
           <div className="buble"> 
               {vector_op_val}
           </div>
@@ -72,7 +72,7 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wm
           Landslides Zones
         </p>
         <div className="mycontainer">
-          <p className="prompt">Contrast</p>
+          <p className="prompt">Opacity</p>
           <div className="buble"> 
               {wms_op_val}
           </div>
@@ -88,7 +88,7 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wm
           type="checkbox"
           checked={layer_zones}
           onChange={(event) => onLayerZones(event)}
-          className="input_name"
+          className="cm-toggle"
         /> 
         <span>Hide/show</span>
 
@@ -99,7 +99,7 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wm
           GEOGLoWS Drainage Line
         </p>
         <div className="mycontainer">
-          <p className="prompt">Contrast</p>
+          <p className="prompt">Opacity</p>
           <div className="buble"> 
               {river_op_val}
           </div>
@@ -117,7 +117,7 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wm
           type="checkbox"
           checked={layer_river}
           onChange={(event) => onLayerRiver(event)}
-          className="input_name"
+          className="cm-toggle"
         /> 
         <span>Hide/show</span>
 
