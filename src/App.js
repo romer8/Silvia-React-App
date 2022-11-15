@@ -21,6 +21,8 @@ const App = () => {
   const [center, setCenter] = useState(mapConfig.center);
   const [zoom, setZoom] = useState(mapConfig.zoom);
   const [showLayer1, setShowLayer1] = useState(true);
+  const [showRiverLayer, setShowRiverLayer] = useState(true);
+
   const [loading, setLoading] = useState(true);
   const [floodLayer, setFloodLayer] = useState(
     {
@@ -38,6 +40,7 @@ const App = () => {
   const [actualDate, setActualDate]= useState('');
   const [opacityLayer, SetOpacityLayer]= useState(0.4);
   const [opacityVectorLayer, setOpacityVectorLayer]= useState(0.4);
+  const [opacityRiverLayer, setOpacityRiverLayer]= useState(0.2);
 
   const changeStyle = (date) =>{
     setShowLayer1(false)
@@ -46,6 +49,9 @@ const App = () => {
 
   const onOffLayer = (event) =>{
     setShowLayer1(event.target.checked)
+  }
+  const onOffRiverLayer = (event) =>{
+    setShowRiverLayer(event.target.checked)
   }
 
 const getStyle = (feature) => {
@@ -147,7 +153,11 @@ const getStyle = (feature) => {
           wms_op_val = {opacityLayer}
           opacity_vector = {setOpacityVectorLayer}
           vector_op_val = {opacityVectorLayer}
-
+          opacity_rivers = {setOpacityRiverLayer}
+          river_op_val = {opacityRiverLayer}
+          layer_river =  {showRiverLayer}
+          onLayerRiver = {onOffRiverLayer}
+          
         />
 
         <Map center={fromLonLat(center)} zoom={zoom}>
@@ -176,6 +186,7 @@ const getStyle = (feature) => {
               opacity={opacityLayer}
               zIndex={1}
             />
+             {showRiverLayer && (
             <TileLayer 
               layerClass={"wms_layer2"}
               source={new TileWMS({
@@ -184,9 +195,10 @@ const getStyle = (feature) => {
                 serverType: 'geoserver',
                 crossOrigin: 'Anonymous'
               })} 
-              opacity={0.2}
+              opacity={opacityRiverLayer}
               zIndex={2}
             />
+             )}
             {showLayer1 && (
                 <VectorLayer
                 source={vector({
