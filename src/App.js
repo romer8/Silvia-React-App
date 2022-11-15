@@ -4,7 +4,7 @@ import Map from "./Map";
 import Modal from "./Modals/modal";
 
 import { Layers, TileLayer, VectorLayer } from "./Layers";
-import { vector,xyz } from "./Source";
+import { vector,xyz,osm } from "./Source";
 import { fromLonLat, get } from "ol/proj";
 import GeoJSON from "ol/format/GeoJSON";
 import TileWMS from 'ol/source/TileWMS';
@@ -175,16 +175,7 @@ const getStyle = (feature) => {
             <TileLayer 
               layerClass={"base_layer"}
             
-              source={xyz(
-                {
-                  attributions:
-                  'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
-                  'rest/services/World_Topo_Map/MapServer">ArcGIS</a>',
-                  url:
-                  'https://server.arcgisonline.com/ArcGIS/rest/services/' +
-                  'World_Imagery/MapServer/tile/{z}/{y}/{x}',
-                }
-            )} zIndex={0} />
+              source={osm()} zIndex={0} />
             {showZonesLayer && (
                 <TileLayer 
                 layerClass={"wms_layer"}
@@ -267,3 +258,17 @@ const getStyle = (feature) => {
 };
 
 export default App;
+
+{/* <TileLayer 
+layerClass={"base_layer"}
+
+source={xyz(
+  {
+    attributions:
+    'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
+    'rest/services/World_Street_Map/MapServer">ArcGIS</a>',
+    url:
+    'https://server.arcgisonline.com/ArcGIS/rest/services/' +
+    'World_Street_Map/MapServer/tile/{z}/{y}/{x}',
+  }
+)} zIndex={0} /> */}
