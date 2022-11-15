@@ -37,6 +37,7 @@ const App = () => {
   const [datesFlood, setDatesFlood]= useState([]);
   const [actualDate, setActualDate]= useState('');
   const [opacityLayer, SetOpacityLayer]= useState(0.4);
+  const [opacityVectorLayer, setOpacityVectorLayer]= useState(0.4);
 
   const changeStyle = (date) =>{
     setShowLayer1(false)
@@ -144,6 +145,9 @@ const getStyle = (feature) => {
           actual_date={actualDate}
           opacity_wms = {SetOpacityLayer}
           wms_op_val = {opacityLayer}
+          opacity_vector = {setOpacityVectorLayer}
+          vector_op_val = {opacityVectorLayer}
+
         />
 
         <Map center={fromLonLat(center)} zoom={zoom}>
@@ -172,6 +176,17 @@ const getStyle = (feature) => {
               opacity={opacityLayer}
               zIndex={1}
             />
+            <TileLayer 
+              layerClass={"wms_layer2"}
+              source={new TileWMS({
+                url: 'https://senamhi.westus2.cloudapp.azure.com/geoserver/peru_hydroviewer/wms',
+                params: { 'LAYERS': 'south_america-peru-geoglows-drainage_line' },
+                serverType: 'geoserver',
+                crossOrigin: 'Anonymous'
+              })} 
+              opacity={0.2}
+              zIndex={2}
+            />
             {showLayer1 && (
                 <VectorLayer
                 source={vector({
@@ -182,7 +197,8 @@ const getStyle = (feature) => {
                 style={function(feature){
                   return getStyle(feature)
                 }}
-                zIndex={2}
+                opacity={opacityVectorLayer}
+                zIndex={3}
 
               />
             )}

@@ -4,7 +4,7 @@ import OLTileLayer from "ol/layer/Tile";
 
 const TileLayer = ({ source, opacity, layerClass, zIndex = 0 }) => {
 	const { map } = useContext(MapContext);
-	const [opacityLayer, SetOpacityLayer ] = useState(opacity);
+	// const [opacityLayer, SetOpacityLayer ] = useState(opacity);
 	const [layer, setLayertile] = useState();
 
 	useEffect(() => {

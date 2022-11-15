@@ -4,11 +4,15 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wms_op_val}) => {
+const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wms_op_val,opacity_vector,vector_op_val}) => {
 
   const opacityHandler = (data) => {
 
     opacity_wms(data);
+  }
+  const opacityHandlerEvents = (data) => {
+    
+    opacity_vector(Number(data));
   }
 
   return(
@@ -43,6 +47,22 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wm
           className="input_name"
         /> 
         <span>Hide/show</span>
+
+        <div className="mycontainer">
+          <p className="prompt">Contrast</p>
+          <div className="buble"> 
+              {vector_op_val}
+          </div>
+          <div className="slider-parent">
+              <input type="range" min="0" max="1"  step="0.1" value={vector_op_val}
+                onChange={({ target: { value: radius } }) => {
+                  opacityHandlerEvents(radius);
+                          }}
+              />
+          </div>
+        </div> 
+
+
         <div className="mainContainer">
         <p className="sudo_title">
           Landslides Zones
