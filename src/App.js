@@ -21,7 +21,8 @@ const App = () => {
   const [center, setCenter] = useState(mapConfig.center);
   const [zoom, setZoom] = useState(mapConfig.zoom);
   const [showLayer1, setShowLayer1] = useState(true);
-  const [showRiverLayer, setShowRiverLayer] = useState(true);
+  const [showRiverLayer, setShowRiverLayer] = useState(false);
+  const [showZonesLayer, setShowZonesLayer] = useState(true);
 
   const [loading, setLoading] = useState(true);
   const [floodLayer, setFloodLayer] = useState(
@@ -39,8 +40,8 @@ const App = () => {
   const [datesFlood, setDatesFlood]= useState([]);
   const [actualDate, setActualDate]= useState('');
   const [opacityLayer, SetOpacityLayer]= useState(0.4);
-  const [opacityVectorLayer, setOpacityVectorLayer]= useState(0.4);
-  const [opacityRiverLayer, setOpacityRiverLayer]= useState(0.2);
+  const [opacityVectorLayer, setOpacityVectorLayer]= useState(1);
+  const [opacityRiverLayer, setOpacityRiverLayer]= useState(0.3);
 
   const changeStyle = (date) =>{
     setShowLayer1(false)
@@ -52,6 +53,9 @@ const App = () => {
   }
   const onOffRiverLayer = (event) =>{
     setShowRiverLayer(event.target.checked)
+  }
+  const onOffZonesLayer = (event) =>{
+    setShowZonesLayer(event.target.checked)
   }
 
 const getStyle = (feature) => {
@@ -157,6 +161,8 @@ const getStyle = (feature) => {
           river_op_val = {opacityRiverLayer}
           layer_river =  {showRiverLayer}
           onLayerRiver = {onOffRiverLayer}
+          layer_zones = {showZonesLayer}
+          onLayerZones = {onOffZonesLayer}
           
         />
 
@@ -175,29 +181,31 @@ const getStyle = (feature) => {
                   'World_Imagery/MapServer/tile/{z}/{y}/{x}',
                 }
             )} zIndex={0} />
-              <TileLayer 
-              layerClass={"wms_layer"}
-              source={new TileWMS({
-                url: 'https://geoserver.hydroshare.org/geoserver/HS-22714855232d44198d12aa4109ec8478/wms',
-                params: { 'LAYERS': 'GEOGLOWS_SilviaV3' },
-                serverType: 'geoserver',
-                crossOrigin: 'Anonymous'
-              })} 
-              opacity={opacityLayer}
-              zIndex={1}
-            />
+            {showZonesLayer && (
+                <TileLayer 
+                layerClass={"wms_layer"}
+                source={new TileWMS({
+                  url: 'https://geoserver.hydroshare.org/geoserver/HS-22714855232d44198d12aa4109ec8478/wms',
+                  params: { 'LAYERS': 'GEOGLOWS_SilviaV3' },
+                  serverType: 'geoserver',
+                  crossOrigin: 'Anonymous'
+                })} 
+                opacity={opacityLayer}
+                zIndex={1}
+              />
+            )}
              {showRiverLayer && (
-            <TileLayer 
-              layerClass={"wms_layer2"}
-              source={new TileWMS({
-                url: 'https://senamhi.westus2.cloudapp.azure.com/geoserver/peru_hydroviewer/wms',
-                params: { 'LAYERS': 'south_america-peru-geoglows-drainage_line' },
-                serverType: 'geoserver',
-                crossOrigin: 'Anonymous'
-              })} 
-              opacity={opacityRiverLayer}
-              zIndex={2}
-            />
+              <TileLayer 
+                layerClass={"wms_layer2"}
+                source={new TileWMS({
+                  url: 'https://senamhi.westus2.cloudapp.azure.com/geoserver/peru_hydroviewer/wms',
+                  params: { 'LAYERS': 'south_america-peru-geoglows-drainage_line' },
+                  serverType: 'geoserver',
+                  crossOrigin: 'Anonymous'
+                })} 
+                opacity={opacityRiverLayer}
+                zIndex={2}
+              />
              )}
             {showLayer1 && (
                 <VectorLayer

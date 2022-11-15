@@ -4,7 +4,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wms_op_val,opacity_vector,vector_op_val, opacity_rivers, river_op_val, layer_river, onLayerRiver}) => {
+const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wms_op_val,opacity_vector,vector_op_val, opacity_rivers, river_op_val, layer_river, onLayerRiver, layer_zones, onLayerZones}) => {
 
   const opacityHandler = (data) => {
 
@@ -84,6 +84,13 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wm
               />
           </div>
         </div> 
+        <input
+          type="checkbox"
+          checked={layer_zones}
+          onChange={(event) => onLayerZones(event)}
+          className="input_name"
+        /> 
+        <span>Hide/show</span>
 
         </div>
 
