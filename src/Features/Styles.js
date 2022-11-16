@@ -65,6 +65,15 @@ const LAYERstyles = {
       color: "red",
     }),
   }),
+  Department:new Style({
+    stroke: new Stroke({
+      color: "#16a085",
+      width: 4,
+    }),
+    fill: new Fill({
+      color: "transparent",
+    }),
+  }),
   
 };
 

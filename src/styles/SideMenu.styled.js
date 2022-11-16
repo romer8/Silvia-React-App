@@ -119,4 +119,38 @@ export const SideMenu = styled.div`
         -o-transition: ease .3s;
     }
 
+    .my-legend .legend-title {
+        text-align: left;
+    }
+    .my-legend .legend-scale ul {
+        margin: 0;
+        margin-bottom: 10px;
+        padding: 0;
+        float: left;
+        list-style: none;
+    }
+    .my-legend .legend-scale ul li {
+        font-size: 80%;
+        list-style: none;
+        margin-left: 0;
+        line-height: 18px;
+        margin-bottom: 10px;
+    }
+    .my-legend ul.legend-labels li span {
+        display: block;
+        float: left;
+        height: 16px;
+        width: 30px;
+        margin-right: 5px;
+        margin-left: 0;
+        border: 1px solid #999;
+    }
+    .my-legend .legend-source {
+        font-size: 70%;
+        clear: both;
+    }
+    .my-legend a {
+        color: #ffff;
+    }
+
 `;

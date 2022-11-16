@@ -4,7 +4,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wms_op_val,opacity_vector,vector_op_val, opacity_rivers, river_op_val, layer_river, onLayerRiver, layer_zones, onLayerZones}) => {
+const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wms_op_val,opacity_vector,vector_op_val, opacity_rivers, river_op_val, layer_river, onLayerRiver, layer_zones, onLayerZones,actual_department,departments, onDepartmentChange}) => {
 
   const opacityHandler = (data) => {
 
@@ -64,7 +64,20 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wm
                           }}
               />
           </div>
-        </div> 
+        </div>
+
+        <div className='my-legend'>
+          <div className='legend-title'><p>Event Warning Level</p></div>
+          <div className='legend-scale'>
+            <ul className='legend-labels'>
+              <li><span style={{background:'#ff0000'}}></span>Red Warning</li>
+              <li><span style={{background:'#ffa500'}}></span>Orange Warning</li>
+              <li><span style={{background:'#ffff00'}}></span>Yellow Warning</li>
+            </ul>
+          </div>
+          <br></br>
+          <div className='legend-source'>Source: <a href="https://www.senamhi.gob.pe/?p=monitoreo-silvia">Senamhi/Silvia</a></div>
+        </div>
 
 
         <div className="mainContainer">
@@ -120,6 +133,28 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wm
           className="cm-toggle"
         /> 
         <span>Hide/show</span>
+
+        <p className="sudo_title">
+          Departments Boundaries
+        </p>
+        <div className="mycontainer">
+          
+          <p className="prompt">Departments</p>
+          <DropdownButton 
+            id="dropdown-button-dark-example2"
+            variant="secondary"
+            menuVariant="dark"
+            title={actual_department}
+            // className="mt-2"
+            size= 'lg'
+            onSelect={(event) => onDepartmentChange(event)}
+          >
+          {departments.map((department, index) => (
+            
+            <Dropdown.Item  eventKey={department} key={index}>{department}</Dropdown.Item>
+          ))}
+          </DropdownButton>    
+        </div>
 
         </div>        
 

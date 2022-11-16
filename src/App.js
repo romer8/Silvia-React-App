@@ -27,9 +27,23 @@ const App = () => {
   const [showLayer1, setShowLayer1] = useState(true);
   const [showRiverLayer, setShowRiverLayer] = useState(false);
   const [showZonesLayer, setShowZonesLayer] = useState(true);
+  const [actualDepartment, setActualDepartment] = useState('');
+  const [departments, setDepartments]= useState([]);
 
   const [loading, setLoading] = useState(true);
   const [floodLayer, setFloodLayer] = useState(
+    {
+      "type": "FeatureCollection",
+      "crs": {
+          "type": "name",
+          "properties": {
+              "name": "EPSG:4326"
+          }
+      },
+      "features": []
+    }
+  );
+  const [departmentLayer, setDepartmentLayer] = useState(
     {
       "type": "FeatureCollection",
       "crs": {
@@ -50,6 +64,9 @@ const App = () => {
   const changeStyle = (date) =>{
     setShowLayer1(false)
     setActualDate(date);
+  }
+  const changeDepartment = (dp) =>{
+    setActualDepartment(dp);
   }
 
   const onOffLayer = (event) =>{
@@ -76,6 +93,63 @@ const getStyle = (feature) => {
     }
     
   }
+const getStyleRegion =(feature) =>{
+  return FeatureStyles.Department
+}
+
+  // Adding the dropdownmenu provinces
+  useEffect(() => {
+    console.log("useEffect app.js 3");
+
+    const service_link_dates = 'http://127.0.0.1:8000/apps/silvia/departments/';
+
+    const fetchDepartments = async () =>{
+      try {
+          const {data: response} = await axios.get(service_link_dates);
+          console.log(response)
+          setDepartments(response['departments'])
+          setActualDepartment(response['departments'][0])
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
+    fetchDepartments();
+  
+  }, [])
+
+  useEffect(() => {
+    console.log(actualDepartment)
+    const Mydata = {
+      'department': actualDepartment
+    }
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    const service_link = 'http://127.0.0.1:8000/apps/silvia/departments-json/';
+    const fetchDepartmentJSON = async () =>{
+      try {
+        
+          const {data: response} = await axios.post(service_link,Mydata,config);
+          console.log(response)
+          setDepartmentLayer(response)
+          setLoading(false);
+          // setShowLayer1(true)
+        
+
+      } catch (error) {
+        console.error(error.message);
+      }
+      setLoading(false);
+    }
+    if(actualDepartment !==''){
+      fetchDepartmentJSON();
+    }
+
+	}, [actualDepartment]);
+
+
   // Adding the wms layer to the map
   useEffect(() => {
     console.log("useEffect app.js 3");
@@ -167,7 +241,9 @@ const getStyle = (feature) => {
           onLayerRiver = {onOffRiverLayer}
           layer_zones = {showZonesLayer}
           onLayerZones = {onOffZonesLayer}
-          
+          actual_department = {actualDepartment}
+          departments = {departments}
+          onDepartmentChange = {changeDepartment}
         />
 
         <Map center={fromLonLat(center)} zoom={zoom}>
@@ -217,6 +293,19 @@ const getStyle = (feature) => {
 
               />
             )}
+              <VectorLayer
+                source={vector({
+                  features: new GeoJSON().readFeatures(departmentLayer, {
+                    featureProjection: get("EPSG:3857"),
+                  }),
+                })}
+                style={function(feature){
+                  return getStyleRegion(feature)
+                }}
+                opacity={1}
+                zIndex={4}
+
+              />
 
           </Layers>
           <Controls>
