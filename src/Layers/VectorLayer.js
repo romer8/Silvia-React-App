@@ -30,7 +30,7 @@ const VectorLayerWrapper = ({ source, style, opacity, zIndex = 0, isZoom, setIsZ
 				// 	duration: 1000
 				// });
 				
-				map.getView().fit(source.getExtent(), {duration: 1500});
+				map.getView().fit(source.getExtent(), {duration: 900});
 				
 			} catch (error) {
 			//   console.error(error.message);
