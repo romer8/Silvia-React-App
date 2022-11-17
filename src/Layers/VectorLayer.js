@@ -25,7 +25,7 @@ const VectorLayerWrapper = ({ source, style, opacity, zIndex = 0, isZoom }) => {
 
 		const zoom_to_layer = async () =>{
 			try {
-				map.getView().fit(source.getExtent(), {duration: 1500});
+				map.getView().fit(source.getExtent(), {duration: 1000});
 				
 			} catch (error) {
 			//   console.error(error.message);
@@ -40,23 +40,21 @@ const VectorLayerWrapper = ({ source, style, opacity, zIndex = 0, isZoom }) => {
 		return () => {
 			if (map) {
 				console.log("here removing vector layer")
-				// map.removeLayer(vectorLayerMap);
-
+				map.removeLayer(vectorLayerMap);
 			}
 		};
 	}, [map,source]);
 
 	// useEffect(() => {
 	// 	if (!map) return;
-	// 	// console.log(source.getExtent())
-	// 	// map.getView().fit(source.getExtent());
+
 
 	//   return () => {
 		
 	//   }
 	// }, [source])
 	
-	
+
 	
 	return null;
 };

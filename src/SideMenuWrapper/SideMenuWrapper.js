@@ -4,18 +4,45 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wms_op_val,opacity_vector,vector_op_val, opacity_rivers, river_op_val, layer_river, onLayerRiver, layer_zones, onLayerZones,actual_department,departments, onDepartmentChange}) => {
+const SideMenuWrapper = (
+  { 
+    style, 
+    onLayer,
+    layer,
+    dates,
+    actual_date,
+    opacity_wms,
+    wms_op_val,
+    opacity_vector,
+    vector_op_val, 
+    opacity_rivers, 
+    river_op_val, 
+    layer_river, 
+    onLayerRiver, 
+    layer_zones, 
+    onLayerZones,
+    actual_department,
+    departments, 
+    onDepartmentChange,
+    actual_province,
+    provinces, 
+    onProvinceChange,
+    actual_basin,
+    basins, 
+    onBasinChange,
+    deactivateZoom
+  }) => {
 
   const opacityHandler = (data) => {
-
+    deactivateZoom()
     opacity_wms(data);
   }
   const opacityHandlerEvents = (data) => {
-    
+    deactivateZoom()
     opacity_vector(Number(data));
   }
   const opacityHandlerRivers = (data) => {
-    
+    deactivateZoom()
     opacity_rivers(Number(data));
   }
 
@@ -135,7 +162,7 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wm
         <span>Hide/show</span>
 
         <p className="sudo_title">
-          Departments Boundaries
+          Boundaries
         </p>
         <div className="mycontainer">
           
@@ -152,6 +179,43 @@ const SideMenuWrapper = ({ style, onLayer,layer,dates,actual_date,opacity_wms,wm
           {departments.map((department, index) => (
             
             <Dropdown.Item  eventKey={department} key={index}>{department}</Dropdown.Item>
+          ))}
+          </DropdownButton>    
+        </div>
+        <div className="mycontainer">
+          
+          <p className="prompt">Provinces</p>
+          <DropdownButton 
+            id="dropdown-button-dark-example2"
+            variant="secondary"
+            menuVariant="dark"
+            title={actual_province.split(" ")[1]}
+            // className="mt-2"
+            size= 'lg'
+            onSelect={(event) => onProvinceChange(event)}
+          >
+          {provinces.map((province, index) => (
+            
+            <Dropdown.Item  eventKey={province} key={index}>{province.split(" ")[1]}</Dropdown.Item>
+          ))}
+          </DropdownButton>    
+        </div>
+
+        <div className="mycontainer">
+          
+          <p className="prompt">Basins</p>
+          <DropdownButton 
+            id="dropdown-button-dark-example2"
+            variant="secondary"
+            menuVariant="dark"
+            title={actual_basin.split(" ")[1]}
+            // className="mt-2"
+            size= 'lg'
+            onSelect={(event) => onBasinChange(event)}
+          >
+          {basins.map((basin, index) => (
+            
+            <Dropdown.Item  eventKey={basin} key={index}>{basin.split(" ")[1]}</Dropdown.Item>
           ))}
           </DropdownButton>    
         </div>

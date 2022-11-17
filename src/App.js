@@ -28,9 +28,18 @@ const App = () => {
   const [showRiverLayer, setShowRiverLayer] = useState(false);
   const [showZonesLayer, setShowZonesLayer] = useState(true);
   const [actualDepartment, setActualDepartment] = useState('');
+  const [actualBasin, setActualBasin] = useState('');
+  const [actualProvince, setActualProvince] = useState('');
+
   const [departments, setDepartments]= useState([]);
+  const [provinces, setProvinces]= useState([]);
+  const [basins, setBasins] = useState([])
+
   const [isZoomDepartment, setIsZoomDepartment] = useState(false)
   const [isZoomEvent, setIsZoomEvent] = useState(true)
+
+  const [isZoomProvinces, setIsZoomProvinces] = useState(false)
+  const [isZoomBasins, setIsZoomBasins] = useState(false)
 
   const [loading, setLoading] = useState(true);
   const [floodLayer, setFloodLayer] = useState(
@@ -57,6 +66,32 @@ const App = () => {
       "features": []
     }
   );
+
+  const [provinciasLayer, setProvinciasLayer] = useState(
+    {
+      "type": "FeatureCollection",
+      "crs": {
+          "type": "name",
+          "properties": {
+              "name": "EPSG:4326"
+          }
+      },
+      "features": []
+    }
+  );
+  const [basinLayer, setBasinLayer] = useState(
+    {
+      "type": "FeatureCollection",
+      "crs": {
+          "type": "name",
+          "properties": {
+              "name": "EPSG:4326"
+          }
+      },
+      "features": []
+    }
+  );
+
   const [datesFlood, setDatesFlood]= useState([]);
   const [actualDate, setActualDate]= useState('');
   const [opacityLayer, SetOpacityLayer]= useState(0.4);
@@ -68,11 +103,37 @@ const App = () => {
     setActualDate(date);
     setIsZoomEvent(true)
     setIsZoomDepartment(false);
+    setIsZoomProvinces(false)
+    setIsZoomBasins(false);
+
   }
   const changeDepartment = (dp) =>{
     setActualDepartment(dp);
-    setIsZoomEvent(false)
     setIsZoomDepartment(true);
+    setIsZoomEvent(false);
+    setIsZoomProvinces(false);
+    setIsZoomBasins(false);
+  }
+
+  const changeProvinces = (prov) =>{
+    setActualProvince(prov);
+    setIsZoomDepartment(false);
+    setIsZoomEvent(false);
+    setIsZoomProvinces(true);
+    setIsZoomBasins(false);
+  }
+  const changeBasins = (bas) =>{
+    setActualBasin(bas);
+    setIsZoomDepartment(false);
+    setIsZoomEvent(false);
+    setIsZoomProvinces(false);
+    setIsZoomBasins(true);
+  }
+  const setChangeDefault = () =>{
+    setIsZoomDepartment(false);
+    setIsZoomEvent(false);
+    setIsZoomProvinces(false);
+    setIsZoomBasins(false);
   }
 
   const onOffLayer = (event) =>{
@@ -102,10 +163,15 @@ const getStyle = (feature) => {
 const getStyleRegion =(feature) =>{
   return FeatureStyles.Department
 }
+const getStyleProvince =(feature) =>{
+  return FeatureStyles.Province
+}
+const getStyleBasin =(feature) =>{
+  return FeatureStyles.Basin
+}
 
-  // Adding the dropdownmenu provinces
+  // Adding the dropdownmenu departments
   useEffect(() => {
-    console.log("useEffect app.js 3");
 
     const service_link_dates = 'http://127.0.0.1:8000/apps/silvia/departments/';
 
@@ -122,6 +188,43 @@ const getStyleRegion =(feature) =>{
     fetchDepartments();
   
   }, [])
+
+    // Adding the dropdownmenu provinces
+    useEffect(() => {
+
+      const service_link_dates = 'http://127.0.0.1:8000/apps/silvia/provincias/';
+  
+      const fetchProvinces = async () =>{
+        try {
+            const {data: response} = await axios.get(service_link_dates);
+            console.log(response)
+            setProvinces(response['provinces'])
+            setActualProvince(response['provinces'][0])
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+      fetchProvinces();
+    
+    }, [])
+    // Adding the dropdownmenu basins
+    useEffect(() => {
+
+      const service_link_dates = 'http://127.0.0.1:8000/apps/silvia/basins/';
+  
+      const fetchBasins = async () =>{
+        try {
+            const {data: response} = await axios.get(service_link_dates);
+            console.log(response)
+            setBasins(response['basin'])
+            setActualBasin(response['basin'][0])
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+      fetchBasins();
+    
+    }, [])
 
   useEffect(() => {
     console.log(actualDepartment)
@@ -155,6 +258,69 @@ const getStyleRegion =(feature) =>{
 
 	}, [actualDepartment]);
 
+  useEffect(() => {
+    console.log(actualProvince)
+    const Mydata = {
+      'provincia': actualProvince
+    }
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    const service_link = 'http://127.0.0.1:8000/apps/silvia/provincias-json/';
+    const fetchProvinciasJSON = async () =>{
+      try {
+        
+          const {data: response} = await axios.post(service_link,Mydata,config);
+          console.log(response)
+          setProvinciasLayer(response)
+          setLoading(false);
+          // setShowLayer1(true)
+        
+
+      } catch (error) {
+        console.error(error.message);
+      }
+      setLoading(false);
+    }
+    if(actualProvince !==''){
+      fetchProvinciasJSON();
+    }
+
+	}, [actualProvince]);
+
+  useEffect(() => {
+    console.log(actualBasin)
+    const Mydata = {
+      'basin': actualBasin
+    }
+    const config = {
+      header: {
+        "Content-Type": "application/json",
+      },
+    };
+    const service_link = 'http://127.0.0.1:8000/apps/silvia/basin-json/';
+    const fetchBasinJSON = async () =>{
+      try {
+        
+          const {data: response} = await axios.post(service_link,Mydata,config);
+          console.log(response)
+          setBasinLayer(response)
+          setLoading(false);
+          // setShowLayer1(true)
+        
+
+      } catch (error) {
+        console.error(error.message);
+      }
+      setLoading(false);
+    }
+    if(actualBasin !==''){
+      fetchBasinJSON();
+    }
+
+	}, [actualBasin]);
 
   // Adding the wms layer to the map
   useEffect(() => {
@@ -250,6 +416,13 @@ const getStyleRegion =(feature) =>{
           actual_department = {actualDepartment}
           departments = {departments}
           onDepartmentChange = {changeDepartment}
+          actual_province = {actualProvince}
+          provinces = {provinces}
+          onProvinceChange = {changeProvinces}
+          actual_basin = {actualBasin}
+          basins = {basins}
+          onBasinChange = {changeBasins}
+          deactivateZoom = {setChangeDefault}
         />
 
         <Map center={fromLonLat(center)} zoom={zoom}>
@@ -312,6 +485,32 @@ const getStyleRegion =(feature) =>{
                 opacity={1}
                 zIndex={4}
                 isZoom = {isZoomDepartment}
+              />
+              <VectorLayer
+                source={vector({
+                  features: new GeoJSON().readFeatures(provinciasLayer, {
+                    featureProjection: get("EPSG:3857"),
+                  }),
+                })}
+                style={function(feature){
+                  return getStyleProvince(feature)
+                }}
+                opacity={1}
+                zIndex={5}
+                isZoom = {isZoomProvinces}
+              />
+              <VectorLayer
+                source={vector({
+                  features: new GeoJSON().readFeatures(basinLayer, {
+                    featureProjection: get("EPSG:3857"),
+                  }),
+                })}
+                style={function(feature){
+                  return getStyleBasin(feature)
+                }}
+                opacity={1}
+                zIndex={5}
+                isZoom = {isZoomBasins}
               />
 
           </Layers>

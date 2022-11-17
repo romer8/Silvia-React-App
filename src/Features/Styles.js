@@ -74,7 +74,24 @@ const LAYERstyles = {
       color: "transparent",
     }),
   }),
-  
+  Province:new Style({
+    stroke: new Stroke({
+      color: "#364652",
+      width: 4,
+    }),
+    fill: new Fill({
+      color: "transparent",
+    }),
+  }),
+  Basins:new Style({
+    stroke: new Stroke({
+      color: "#364652",
+      width: 4,
+    }),
+    fill: new Fill({
+      color: "transparent",
+    }),
+  })
 };
 
 export default LAYERstyles;
