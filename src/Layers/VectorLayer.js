@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import MapContext from "../Map/MapContext";
 import VectorLayer from "ol/layer/Vector";
 
-const VectorLayerWrapper = ({ source, style, opacity, zIndex = 0 }) => {
+const VectorLayerWrapper = ({ source, style, opacity, zIndex = 0, isZoom }) => {
 	const { map } = useContext(MapContext);
 	// const [vectorLayerSource, setVectorLayerSource] = useState();
 
@@ -22,34 +22,39 @@ const VectorLayerWrapper = ({ source, style, opacity, zIndex = 0 }) => {
 
 		map.addLayer(vectorLayerMap);
 		vectorLayerMap.setZIndex(zIndex);
-		console.log("adding extent",source.getExtent())
 
-		console.log("fitting",typeof(source))
+		const zoom_to_layer = async () =>{
+			try {
+				map.getView().fit(source.getExtent(), {duration: 1500});
+				
+			} catch (error) {
+			//   console.error(error.message);
+			}
+		  }
+		if(isZoom){
+			zoom_to_layer();
+		}
 
-		// if(!source){
-		// 	setVectorLayerSource(source)
-		// }
+
+
 		return () => {
 			if (map) {
 				console.log("here removing vector layer")
-
-				map.removeLayer(vectorLayerMap);
+				// map.removeLayer(vectorLayerMap);
 
 			}
-
-
 		};
 	}, [map,source]);
+
 	// useEffect(() => {
-	// 	console.log("calling it")
 	// 	if (!map) return;
+	// 	// console.log(source.getExtent())
 	// 	// map.getView().fit(source.getExtent());
-	// 	setVectorLayerSource(source)
 
 	//   return () => {
 		
 	//   }
-	// }, [vectorLayerSource])
+	// }, [source])
 	
 	
 	

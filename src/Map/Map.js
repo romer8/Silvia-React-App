@@ -20,24 +20,27 @@ const Map = ({ children, zoom, center }) => {
 		let mapObject = new ol.Map(options);
 		mapObject.setTarget(mapRef.current);
 		setMap(mapObject);
+
+
+
 		return () => {
 			mapObject.setTarget(undefined)
 		};
 	}, []);
 
 	// zoom change handler
-	useEffect(() => {
-		if (!map) return;
+	// useEffect(() => {
+	// 	if (!map) return;
 
-		map.getView().setZoom(zoom);
-	}, [zoom]);
+	// 	map.getView().setZoom(zoom);
+	// }, [zoom]);
 
-	// center change handler
-	useEffect(() => {
-		if (!map) return;
+	// // center change handler
+	// useEffect(() => {
+	// 	if (!map) return;
 
-		map.getView().setCenter(center)
-	}, [center])
+	// 	map.getView().setCenter(center)
+	// }, [center])
 
 	return (
 		<MapContainer>

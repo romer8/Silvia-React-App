@@ -29,6 +29,8 @@ const App = () => {
   const [showZonesLayer, setShowZonesLayer] = useState(true);
   const [actualDepartment, setActualDepartment] = useState('');
   const [departments, setDepartments]= useState([]);
+  const [isZoomDepartment, setIsZoomDepartment] = useState(false)
+  const [isZoomEvent, setIsZoomEvent] = useState(true)
 
   const [loading, setLoading] = useState(true);
   const [floodLayer, setFloodLayer] = useState(
@@ -64,9 +66,13 @@ const App = () => {
   const changeStyle = (date) =>{
     setShowLayer1(false)
     setActualDate(date);
+    setIsZoomEvent(true)
+    setIsZoomDepartment(false);
   }
   const changeDepartment = (dp) =>{
     setActualDepartment(dp);
+    setIsZoomEvent(false)
+    setIsZoomDepartment(true);
   }
 
   const onOffLayer = (event) =>{
@@ -290,6 +296,7 @@ const getStyleRegion =(feature) =>{
                 }}
                 opacity={opacityVectorLayer}
                 zIndex={3}
+                isZoom = {isZoomEvent}
 
               />
             )}
@@ -304,7 +311,7 @@ const getStyleRegion =(feature) =>{
                 }}
                 opacity={1}
                 zIndex={4}
-
+                isZoom = {isZoomDepartment}
               />
 
           </Layers>
