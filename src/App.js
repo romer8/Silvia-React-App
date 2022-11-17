@@ -117,7 +117,7 @@ const App = () => {
     setIsZoomEvent(false);
     setIsZoomProvinces(false);
     setIsZoomBasins(false);
-
+    setShowDepartmentLayer(true);
   }
 
   const changeProvinces = (prov) =>{
