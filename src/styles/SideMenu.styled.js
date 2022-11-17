@@ -42,6 +42,7 @@ export const SideMenu = styled.div`
     }
     .slider-parent{
         padding-left:20px;
+        width: 100%;
     }
     
     .dropdown-menu {
@@ -154,6 +155,10 @@ export const SideMenu = styled.div`
     }
     .my-legend a {
         color: #ffff;
+    }
+
+    .slider-class{
+        width:100%;
     }
 
 `;

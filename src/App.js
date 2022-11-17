@@ -105,15 +105,15 @@ const App = () => {
   const changeStyle = (date) =>{
     setShowLayer1(false)
     setActualDate(date);
-    setIsZoomEvent(true)
+    setIsZoomEvent(true);
     setIsZoomDepartment(false);
     setIsZoomProvinces(false)
     setIsZoomBasins(false);
 
   }
   const changeDepartment = (dp) =>{
+    // console.log("cahngeing")
     setActualDepartment(dp);
-    setIsZoomDepartment(true);
     setIsZoomEvent(false);
     setIsZoomProvinces(false);
     setIsZoomBasins(false);
@@ -124,7 +124,6 @@ const App = () => {
     setActualProvince(prov);
     setIsZoomDepartment(false);
     setIsZoomEvent(false);
-    setIsZoomProvinces(true);
     setIsZoomBasins(false);
     setShowProvinceLayer(true);
 
@@ -134,7 +133,6 @@ const App = () => {
     setIsZoomDepartment(false);
     setIsZoomEvent(false);
     setIsZoomProvinces(false);
-    setIsZoomBasins(true);
     setShowBasinLayer(true);
 
   }
@@ -273,6 +271,8 @@ const getStyleBasin =(feature) =>{
           console.log(response)
           setDepartmentLayer(response)
           setLoading(false);
+          setIsZoomDepartment(true);
+
           // setShowLayer1(true)
         
 
@@ -305,6 +305,8 @@ const getStyleBasin =(feature) =>{
           console.log(response)
           setProvinciasLayer(response)
           setLoading(false);
+          setIsZoomProvinces(true);
+
           // setShowLayer1(true)
         
 
@@ -337,6 +339,8 @@ const getStyleBasin =(feature) =>{
           console.log(response)
           setBasinLayer(response)
           setLoading(false);
+          setIsZoomBasins(true);
+
           // setShowLayer1(true)
         
 
@@ -521,6 +525,7 @@ const getStyleBasin =(feature) =>{
                 opacity={1}
                 zIndex={4}
                 isZoom = {isZoomDepartment}
+                setIsZoom = {setIsZoomDepartment}
               />
             }
 
@@ -537,6 +542,8 @@ const getStyleBasin =(feature) =>{
                   opacity={1}
                   zIndex={5}
                   isZoom = {isZoomProvinces}
+                  setIsZoom = {setIsZoomProvinces}
+
                 />
               }
 
@@ -553,6 +560,8 @@ const getStyleBasin =(feature) =>{
                   opacity={1}
                   zIndex={5}
                   isZoom = {isZoomBasins}
+                  setIsZoom = {setIsZoomBasins}
+
                 />
               }
 

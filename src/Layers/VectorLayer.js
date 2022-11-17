@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import MapContext from "../Map/MapContext";
 import VectorLayer from "ol/layer/Vector";
 
-const VectorLayerWrapper = ({ source, style, opacity, zIndex = 0, isZoom }) => {
+const VectorLayerWrapper = ({ source, style, opacity, zIndex = 0, isZoom, setIsZoom }) => {
 	const { map } = useContext(MapContext);
 	// const [vectorLayerSource, setVectorLayerSource] = useState();
 
@@ -25,7 +25,12 @@ const VectorLayerWrapper = ({ source, style, opacity, zIndex = 0, isZoom }) => {
 
 		const zoom_to_layer = async () =>{
 			try {
-				map.getView().fit(source.getExtent(), {duration: 1000});
+				// map.getView().animate({
+				// 	zoom: map.getView().getZoom(),
+				// 	duration: 1000
+				// });
+				
+				map.getView().fit(source.getExtent(), {duration: 1500});
 				
 			} catch (error) {
 			//   console.error(error.message);
@@ -41,6 +46,12 @@ const VectorLayerWrapper = ({ source, style, opacity, zIndex = 0, isZoom }) => {
 			if (map) {
 				console.log("here removing vector layer")
 				map.removeLayer(vectorLayerMap);
+				try{
+					setIsZoom(false)
+				}
+				catch (error) {
+					//   console.error(error.message);
+				}
 			}
 		};
 	}, [map,source]);

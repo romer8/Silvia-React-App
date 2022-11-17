@@ -59,7 +59,7 @@ const SideMenuWrapper = (
         <p className="sudo_title">
           Landslides Events
         </p>
-        <div className="mycontainer">
+        <div className="mycontainer giveSpace">
           
           <p className="prompt">Event Date</p>
           <DropdownButton 
@@ -85,31 +85,31 @@ const SideMenuWrapper = (
         /> 
         <span>Hide/show</span>
 
-        <div className="mycontainer">
+        <div className="mycontainer ">
           <p className="prompt">Opacity</p>
           <div className="buble"> 
               {vector_op_val}
           </div>
           <div className="slider-parent">
-              <input type="range" min="0" max="1"  step="0.1" value={vector_op_val}
+              <input className= "slider-class" type="range" min="0" max="1"  step="0.1" value={vector_op_val}
                 onChange={({ target: { value: radius } }) => {
                   opacityHandlerEvents(radius);
                           }}
               />
           </div>
         </div>
+        <div className="mycontainer">
+          <div className='my-legend'>
+            <div className='legend-title'><p>Event Warning Level</p></div>
+            <div className='legend-scale'>
+              <ul className='legend-labels'>
+                <li><span style={{background:'#ff0000'}}></span>Red Warning</li>
+                <li><span style={{background:'#ffa500'}}></span>Orange Warning</li>
+                <li><span style={{background:'#ffff00'}}></span>Yellow Warning</li>
+              </ul>
+            </div>
 
-        <div className='my-legend'>
-          <div className='legend-title'><p>Event Warning Level</p></div>
-          <div className='legend-scale'>
-            <ul className='legend-labels'>
-              <li><span style={{background:'#ff0000'}}></span>Red Warning</li>
-              <li><span style={{background:'#ffa500'}}></span>Orange Warning</li>
-              <li><span style={{background:'#ffff00'}}></span>Yellow Warning</li>
-            </ul>
           </div>
-          <br></br>
-          <div className='legend-source'>Source: <a href="https://www.senamhi.gob.pe/?p=monitoreo-silvia">Senamhi/Silvia</a></div>
         </div>
 
 
@@ -123,7 +123,7 @@ const SideMenuWrapper = (
               {wms_op_val}
           </div>
           <div className="slider-parent">
-              <input type="range" min="0" max="1"  step="0.1" value={wms_op_val}
+              <input className= "slider-class" type="range" min="0" max="1"  step="0.1" value={wms_op_val}
                 onChange={({ target: { value: radius } }) => {
                             opacityHandler(radius);
                           }}
@@ -150,7 +150,7 @@ const SideMenuWrapper = (
               {river_op_val}
           </div>
           <div className="slider-parent">
-              <input type="range" min="0" max="1"  step="0.1" value={river_op_val}
+              <input className= "slider-class" type="range" min="0" max="1"  step="0.1" value={river_op_val}
                 onChange={({ target: { value: radius } }) => {
                   opacityHandlerRivers(radius);
                           }}
@@ -230,14 +230,14 @@ const SideMenuWrapper = (
             id="dropdown-button-dark-example2"
             variant="secondary"
             menuVariant="dark"
-            title={actual_basin.split(" ")[1]}
+            title={actual_basin}
             // className="mt-2"
             size= 'sm'
             onSelect={(event) => onBasinChange(event)}
           >
           {basins.map((basin, index) => (
             
-            <Dropdown.Item  eventKey={basin} key={index}>{basin.split(" ")[1]}</Dropdown.Item>
+            <Dropdown.Item  eventKey={basin} key={index}>{basin}</Dropdown.Item>
           ))}
           </DropdownButton>    
         </div>
