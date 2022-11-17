@@ -164,7 +164,7 @@ const SideMenuWrapper = (
         <p className="sudo_title">
           Boundaries
         </p>
-        <div className="mycontainer">
+        <div className="mycontainer giveSpace">
           
           <p className="prompt">Departments</p>
           <DropdownButton 
@@ -173,7 +173,7 @@ const SideMenuWrapper = (
             menuVariant="dark"
             title={actual_department}
             // className="mt-2"
-            size= 'lg'
+            size= 'sm'
             onSelect={(event) => onDepartmentChange(event)}
           >
           {departments.map((department, index) => (
@@ -182,7 +182,7 @@ const SideMenuWrapper = (
           ))}
           </DropdownButton>    
         </div>
-        <div className="mycontainer">
+        <div className="mycontainer giveSpace">
           
           <p className="prompt">Provinces</p>
           <DropdownButton 
@@ -191,7 +191,7 @@ const SideMenuWrapper = (
             menuVariant="dark"
             title={actual_province.split(" ")[1]}
             // className="mt-2"
-            size= 'lg'
+            size= 'sm'
             onSelect={(event) => onProvinceChange(event)}
           >
           {provinces.map((province, index) => (
@@ -201,7 +201,7 @@ const SideMenuWrapper = (
           </DropdownButton>    
         </div>
 
-        <div className="mycontainer">
+        <div className="mycontainer giveSpace">
           
           <p className="prompt">Basins</p>
           <DropdownButton 
@@ -210,7 +210,7 @@ const SideMenuWrapper = (
             menuVariant="dark"
             title={actual_basin.split(" ")[1]}
             // className="mt-2"
-            size= 'lg'
+            size= 'sm'
             onSelect={(event) => onBasinChange(event)}
           >
           {basins.map((basin, index) => (

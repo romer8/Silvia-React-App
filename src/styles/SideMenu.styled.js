@@ -20,10 +20,13 @@ export const SideMenu = styled.div`
         font-size:1.5rem;
     }
 
+    .giveSpace{
+        justify-content: space-between;
+    }
     .mycontainer{
         display:flex;
         justify-items:center;
-        padding-top:10px;
+        padding-top:0px;
     }
     .prompt{
         padding-right:4%;
