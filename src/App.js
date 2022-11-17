@@ -26,6 +26,10 @@ const App = () => {
   const [zoom, setZoom] = useState(mapConfig.zoom);
   const [showLayer1, setShowLayer1] = useState(true);
   const [showRiverLayer, setShowRiverLayer] = useState(false);
+  const [showDepartmentLayer, setShowDepartmentLayer] = useState(false);
+  const [showProvinceLayer, setShowProvinceLayer] = useState(false);
+  const [showBasinLayer, setShowBasinLayer] = useState(false);
+
   const [showZonesLayer, setShowZonesLayer] = useState(true);
   const [actualDepartment, setActualDepartment] = useState('');
   const [actualBasin, setActualBasin] = useState('');
@@ -113,6 +117,7 @@ const App = () => {
     setIsZoomEvent(false);
     setIsZoomProvinces(false);
     setIsZoomBasins(false);
+
   }
 
   const changeProvinces = (prov) =>{
@@ -121,6 +126,8 @@ const App = () => {
     setIsZoomEvent(false);
     setIsZoomProvinces(true);
     setIsZoomBasins(false);
+    setShowProvinceLayer(true);
+
   }
   const changeBasins = (bas) =>{
     setActualBasin(bas);
@@ -128,6 +135,8 @@ const App = () => {
     setIsZoomEvent(false);
     setIsZoomProvinces(false);
     setIsZoomBasins(true);
+    setShowBasinLayer(true);
+
   }
   const setChangeDefault = () =>{
     setIsZoomDepartment(false);
@@ -138,12 +147,32 @@ const App = () => {
 
   const onOffLayer = (event) =>{
     setShowLayer1(event.target.checked)
+    setChangeDefault()
   }
   const onOffRiverLayer = (event) =>{
     setShowRiverLayer(event.target.checked)
+    setChangeDefault()
+
   }
   const onOffZonesLayer = (event) =>{
     setShowZonesLayer(event.target.checked)
+    setChangeDefault()
+
+  }
+  const onOffProvincesLayer = (event) =>{
+    setShowProvinceLayer(event.target.checked)
+    setChangeDefault()
+
+  }
+  const onOffBasinsLayer = (event) =>{
+    setShowBasinLayer(event.target.checked)
+    setChangeDefault()
+
+  }
+  const onOffDepartmentLayer = (event) =>{
+    setShowDepartmentLayer(event.target.checked)
+    setChangeDefault()
+
   }
 
 const getStyle = (feature) => {
@@ -423,6 +452,12 @@ const getStyleBasin =(feature) =>{
           basins = {basins}
           onBasinChange = {changeBasins}
           deactivateZoom = {setChangeDefault}
+          onProvinceLayer = {onOffProvincesLayer}
+          onBasinLayer = {onOffBasinsLayer}
+          onDepartmentLayer = {onOffDepartmentLayer}
+          showDepartmentLayer = {showDepartmentLayer}
+          showProvinceLayer = {showProvinceLayer}
+          showBasinLayer = {showBasinLayer}
         />
 
         <Map center={fromLonLat(center)} zoom={zoom}>
@@ -473,7 +508,8 @@ const getStyleBasin =(feature) =>{
 
               />
             )}
-              <VectorLayer
+            { showDepartmentLayer && 
+                <VectorLayer
                 source={vector({
                   features: new GeoJSON().readFeatures(departmentLayer, {
                     featureProjection: get("EPSG:3857"),
@@ -486,32 +522,40 @@ const getStyleBasin =(feature) =>{
                 zIndex={4}
                 isZoom = {isZoomDepartment}
               />
-              <VectorLayer
-                source={vector({
-                  features: new GeoJSON().readFeatures(provinciasLayer, {
-                    featureProjection: get("EPSG:3857"),
-                  }),
-                })}
-                style={function(feature){
-                  return getStyleProvince(feature)
-                }}
-                opacity={1}
-                zIndex={5}
-                isZoom = {isZoomProvinces}
-              />
-              <VectorLayer
-                source={vector({
-                  features: new GeoJSON().readFeatures(basinLayer, {
-                    featureProjection: get("EPSG:3857"),
-                  }),
-                })}
-                style={function(feature){
-                  return getStyleBasin(feature)
-                }}
-                opacity={1}
-                zIndex={5}
-                isZoom = {isZoomBasins}
-              />
+            }
+
+              {showProvinceLayer && 
+                  <VectorLayer
+                  source={vector({
+                    features: new GeoJSON().readFeatures(provinciasLayer, {
+                      featureProjection: get("EPSG:3857"),
+                    }),
+                  })}
+                  style={function(feature){
+                    return getStyleProvince(feature)
+                  }}
+                  opacity={1}
+                  zIndex={5}
+                  isZoom = {isZoomProvinces}
+                />
+              }
+
+              {showBasinLayer &&
+                  <VectorLayer
+                  source={vector({
+                    features: new GeoJSON().readFeatures(basinLayer, {
+                      featureProjection: get("EPSG:3857"),
+                    }),
+                  })}
+                  style={function(feature){
+                    return getStyleBasin(feature)
+                  }}
+                  opacity={1}
+                  zIndex={5}
+                  isZoom = {isZoomBasins}
+                />
+              }
+
 
           </Layers>
           <Controls>

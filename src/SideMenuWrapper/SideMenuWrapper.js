@@ -30,7 +30,13 @@ const SideMenuWrapper = (
     actual_basin,
     basins, 
     onBasinChange,
-    deactivateZoom
+    deactivateZoom,
+    onProvinceLayer,
+    onBasinLayer,
+    onDepartmentLayer,
+    showDepartmentLayer,
+    showProvinceLayer,
+    showBasinLayer
   }) => {
 
   const opacityHandler = (data) => {
@@ -165,7 +171,12 @@ const SideMenuWrapper = (
           Boundaries
         </p>
         <div className="mycontainer giveSpace">
-          
+        <input
+          type="checkbox"
+          checked={showDepartmentLayer}
+          onChange={(event) => onDepartmentLayer(event)}
+          className="cm-toggle"
+          /> 
           <p className="prompt">Departments</p>
           <DropdownButton 
             id="dropdown-button-dark-example2"
@@ -183,8 +194,14 @@ const SideMenuWrapper = (
           </DropdownButton>    
         </div>
         <div className="mycontainer giveSpace">
-          
+          <input
+          type="checkbox"
+          checked={showProvinceLayer}
+          onChange={(event) => onProvinceLayer(event)}
+          className="cm-toggle"
+          /> 
           <p className="prompt">Provinces</p>
+
           <DropdownButton 
             id="dropdown-button-dark-example2"
             variant="secondary"
@@ -202,7 +219,12 @@ const SideMenuWrapper = (
         </div>
 
         <div className="mycontainer giveSpace">
-          
+        <input
+          type="checkbox"
+          checked={showBasinLayer}
+          onChange={(event) => onBasinLayer(event)}
+          className="cm-toggle"
+          /> 
           <p className="prompt">Basins</p>
           <DropdownButton 
             id="dropdown-button-dark-example2"
