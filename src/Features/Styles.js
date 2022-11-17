@@ -85,7 +85,7 @@ const LAYERstyles = {
   }),
   Basins:new Style({
     stroke: new Stroke({
-      color: "#364652",
+      color: "#FF729F",
       width: 4,
     }),
     fill: new Fill({

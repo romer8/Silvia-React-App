@@ -167,7 +167,7 @@ const getStyleProvince =(feature) =>{
   return FeatureStyles.Province
 }
 const getStyleBasin =(feature) =>{
-  return FeatureStyles.Basin
+  return FeatureStyles.Basins
 }
 
   // Adding the dropdownmenu departments
