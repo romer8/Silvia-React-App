@@ -13,6 +13,11 @@ export const SideMenu = styled.div`
     .mainContainer{
         padding-bottom: 5px;
     }
+    p {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+    }
+    
     .wrapper_absolute{
         width: fit-content;
         height: fit-content;
