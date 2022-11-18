@@ -10,6 +10,10 @@ export const SideMenu = styled.div`
     z-index:300;
     bottom:0px;
 
+    .Myhamburguer{
+        display: flex;
+        justify-content: end;
+    }
     .mainContainer{
         padding-bottom: 5px;
     }
@@ -21,7 +25,7 @@ export const SideMenu = styled.div`
     .wrapper_absolute{
         width: fit-content;
         height: fit-content;
-        padding: 20px;
+        padding: 10px;
         background-color:rgba(12, 74, 110, 0.5);        ;
         border-color: blue;
         color:#e0f2fe;
