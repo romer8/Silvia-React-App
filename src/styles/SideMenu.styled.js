@@ -78,8 +78,8 @@ export const SideMenu = styled.div`
     /* To create surface of toggle button */
     .cm-toggle:after {
         content: '';
-        width: 60px;
-        height: 28px;
+        width: 30px;
+        height: 14px;
         display: inline-block;
         background: rgba(196, 195, 195, 0.55);
         border-radius: 18px;
@@ -90,12 +90,12 @@ export const SideMenu = styled.div`
     /* Contents before checkbox to create toggle handle */
     .cm-toggle:before {
         content: '';
-        width: 32px;
-        height: 32px;
+        width: 20px;
+        height: 20px;
         display: block;
         position: absolute;
         left: 0;
-        top: -3px;
+        top: 0px;
         border-radius: 50%;
         background: rgb(255, 255, 255);
         box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
@@ -104,7 +104,7 @@ export const SideMenu = styled.div`
 
     /* Shift the handle to left on check event */
     .cm-toggle:checked:before {
-        left: 32px;
+        left: 15px;
         box-shadow: -1px 1px 3px rgba(0, 0, 0, 0.6);
     }
     /* Background color when toggle button will be active */

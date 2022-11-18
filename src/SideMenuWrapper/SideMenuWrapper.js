@@ -64,7 +64,7 @@ const SideMenuWrapper = (
           <p className="prompt">Event Date</p>
           <DropdownButton 
             id="dropdown-button-dark-example2"
-            variant="secondary"
+            variant="light"
             menuVariant="dark"
             title={actual_date}
             // className="mt-2"
@@ -181,7 +181,7 @@ const SideMenuWrapper = (
           /> 
           <DropdownButton 
             id="dropdown-button-dark-example2"
-            variant="secondary"
+            variant="light"
             menuVariant="dark"
             title={actual_department}
             // className="mt-2"
@@ -206,7 +206,7 @@ const SideMenuWrapper = (
 
           <DropdownButton 
             id="dropdown-button-dark-example2"
-            variant="secondary"
+            variant="light"
             menuVariant="dark"
             title={actual_province.split(" ")[1]?.toLowerCase()}
             size= 'sm'
@@ -231,7 +231,7 @@ const SideMenuWrapper = (
           /> 
           <DropdownButton 
             id="dropdown-button-dark-example2"
-            variant="secondary"
+            variant="light"
             menuVariant="dark"
             title={actual_basin}
             size= 'sm'
