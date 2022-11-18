@@ -3,6 +3,7 @@ import {SideMenu} from '../styles/SideMenu.styled'
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 const SideMenuWrapper = (
   { 
@@ -58,10 +59,17 @@ const SideMenuWrapper = (
         <div className="wrapper_absolute">
         <p className="sudo_title">
           Landslides Events
+          <input
+          type="checkbox"
+          checked={layer}
+          onChange={(event) => onLayer(event)}
+          className="cm-toggle"
+        /> 
         </p>
         <div className="mycontainer giveSpace">
           
           <p className="prompt">Event Date</p>
+          <div>
           <DropdownButton 
             id="dropdown-button-dark-example2"
             variant="light"
@@ -76,17 +84,13 @@ const SideMenuWrapper = (
             <Dropdown.Item  eventKey={date} key={index}>{date}</Dropdown.Item>
           ))}
           </DropdownButton>    
-        </div>
-        <input
-          type="checkbox"
-          checked={layer}
-          onChange={(event) => onLayer(event)}
-          className="cm-toggle"
-        /> 
-        <span>Hide/show</span>
+          </div>
 
-        <div className="mycontainer ">
-          <p className="prompt">Opacity</p>
+        </div>
+
+
+        <div className="mycontainer">
+          <span className="prompt">Opacity</span>
           <div className="buble"> 
               {vector_op_val}
           </div>
@@ -116,9 +120,15 @@ const SideMenuWrapper = (
         <div className="mainContainer">
         <p className="sudo_title">
           Landslides Zones
+          <input
+          type="checkbox"
+          checked={layer_zones}
+          onChange={(event) => onLayerZones(event)}
+          className="cm-toggle"
+        /> 
         </p>
         <div className="mycontainer">
-          <p className="prompt">Opacity</p>
+          <span className="prompt">Opacity</span>
           <div className="buble"> 
               {wms_op_val}
           </div>
@@ -130,22 +140,22 @@ const SideMenuWrapper = (
               />
           </div>
         </div> 
-        <input
-          type="checkbox"
-          checked={layer_zones}
-          onChange={(event) => onLayerZones(event)}
-          className="cm-toggle"
-        /> 
-        <span>Hide/show</span>
+
 
         </div>
 
         <div className="mainContainer">
         <p className="sudo_title">
           GEOGLoWS Drainage Line
+          <input
+          type="checkbox"
+          checked={layer_river}
+          onChange={(event) => onLayerRiver(event)}
+          className="cm-toggle"
+        /> 
         </p>
         <div className="mycontainer">
-          <p className="prompt">Opacity</p>
+          <span className="prompt">Opacity</span>
           <div className="buble"> 
               {river_op_val}
           </div>
@@ -159,51 +169,66 @@ const SideMenuWrapper = (
         </div> 
 
         </div>
-        <input
-          type="checkbox"
-          checked={layer_river}
-          onChange={(event) => onLayerRiver(event)}
-          className="cm-toggle"
-        /> 
-        <span>Hide/show</span>
+
 
         <p className="sudo_title">
           Boundaries
         </p>
-        <p className="prompt">Departments</p>
+
 
         <div className="mycontainer giveSpace">
-        <input
-          type="checkbox"
-          checked={showDepartmentLayer}
-          onChange={(event) => onDepartmentLayer(event)}
-          className="cm-toggle"
-          /> 
+          <div className="spacer_cont">
+            <span className="prompt">
+              Departments
+            </span>
+          </div>
+          <div className="spacer_cont">
+            <input
+            type="checkbox"
+            checked={showDepartmentLayer}
+            onChange={(event) => onDepartmentLayer(event)}
+            className="cm-toggle"
+            /> 
+          </div>
+        </div>
+        <div className="spacer_cont">
+
           <DropdownButton 
             id="dropdown-button-dark-example2"
             variant="light"
             menuVariant="dark"
             title={actual_department}
             // className="mt-2"
+            block={true}
             size= 'sm'
             onSelect={(event) => onDepartmentChange(event)}
+            
           >
           {departments.map((department, index) => (
             
             <Dropdown.Item  eventKey={department} key={index}>{department}</Dropdown.Item>
           ))}
-          </DropdownButton>    
-        </div>
-        <p className="prompt">Provinces</p>
+          </DropdownButton>   
+          </div>
 
         <div className="mycontainer giveSpace">
-          <input
-          type="checkbox"
-          checked={showProvinceLayer}
-          onChange={(event) => onProvinceLayer(event)}
-          className="cm-toggle"
-          /> 
+        <div className="spacer_cont">
+            <span className="prompt">Provinces</span>
 
+          </div>
+        <div className="spacer_cont">
+          <input
+            type="checkbox"
+            checked={showProvinceLayer}
+            onChange={(event) => onProvinceLayer(event)}
+            className="cm-toggle"
+            /> 
+        </div>
+
+
+
+        </div>
+        <div className="spacer_cont">
           <DropdownButton 
             id="dropdown-button-dark-example2"
             variant="light"
@@ -217,33 +242,41 @@ const SideMenuWrapper = (
             <Dropdown.Item  eventKey={province} key={index}>{province.split(" ")[1]?.toLowerCase()}</Dropdown.Item>
           ))}
           </DropdownButton>    
-        </div>
-
-        <p className="prompt">Basins</p>
+          </div>
 
         <div className="mycontainer giveSpace">
+          <div className="spacer_cont">
+            <span className="prompt">Basins</span>
 
-        <input
-          type="checkbox"
-          checked={showBasinLayer}
-          onChange={(event) => onBasinLayer(event)}
-          className="cm-toggle"
-          /> 
-          <DropdownButton 
-            id="dropdown-button-dark-example2"
-            variant="light"
-            menuVariant="dark"
-            title={actual_basin}
-            size= 'sm'
-            onSelect={(event) => onBasinChange(event)}
-          >
-          {basins.map((basin, index) => (
-            
-            <Dropdown.Item  eventKey={basin} key={index}>{basin}</Dropdown.Item>
-          ))}
-          </DropdownButton>    
+          </div>
+          <div className="spacer_cont">
+            <input
+            type="checkbox"
+            checked={showBasinLayer}
+            onChange={(event) => onBasinLayer(event)}
+            className="cm-toggle"
+            /> 
+          </div>
+
+
+ 
         </div>
+        <div className="spacer_cont">
+            <DropdownButton 
+              id="dropdown-button-dark-example2"
+              variant="light"
+              menuVariant="dark"
+              title={actual_basin}
+              size= 'sm'
+              onSelect={(event) => onBasinChange(event)}
+            >
+            {basins.map((basin, index) => (
+              
+              <Dropdown.Item  eventKey={basin} key={index}>{basin}</Dropdown.Item>
+            ))}
+            </DropdownButton>   
 
+          </div>
         </div>        
 
       </SideMenu>
