@@ -170,6 +170,8 @@ const SideMenuWrapper = (
         <p className="sudo_title">
           Boundaries
         </p>
+        <p className="prompt">Departments</p>
+
         <div className="mycontainer giveSpace">
         <input
           type="checkbox"
@@ -177,7 +179,6 @@ const SideMenuWrapper = (
           onChange={(event) => onDepartmentLayer(event)}
           className="cm-toggle"
           /> 
-          <p className="prompt">Departments</p>
           <DropdownButton 
             id="dropdown-button-dark-example2"
             variant="secondary"
@@ -193,6 +194,8 @@ const SideMenuWrapper = (
           ))}
           </DropdownButton>    
         </div>
+        <p className="prompt">Provinces</p>
+
         <div className="mycontainer giveSpace">
           <input
           type="checkbox"
@@ -200,38 +203,37 @@ const SideMenuWrapper = (
           onChange={(event) => onProvinceLayer(event)}
           className="cm-toggle"
           /> 
-          <p className="prompt">Provinces</p>
 
           <DropdownButton 
             id="dropdown-button-dark-example2"
             variant="secondary"
             menuVariant="dark"
-            title={actual_province.split(" ")[1]}
-            // className="mt-2"
+            title={actual_province.split(" ")[1]?.toLowerCase()}
             size= 'sm'
             onSelect={(event) => onProvinceChange(event)}
           >
           {provinces.map((province, index) => (
             
-            <Dropdown.Item  eventKey={province} key={index}>{province.split(" ")[1]}</Dropdown.Item>
+            <Dropdown.Item  eventKey={province} key={index}>{province.split(" ")[1]?.toLowerCase()}</Dropdown.Item>
           ))}
           </DropdownButton>    
         </div>
 
+        <p className="prompt">Basins</p>
+
         <div className="mycontainer giveSpace">
+
         <input
           type="checkbox"
           checked={showBasinLayer}
           onChange={(event) => onBasinLayer(event)}
           className="cm-toggle"
           /> 
-          <p className="prompt">Basins</p>
           <DropdownButton 
             id="dropdown-button-dark-example2"
             variant="secondary"
             menuVariant="dark"
             title={actual_basin}
-            // className="mt-2"
             size= 'sm'
             onSelect={(event) => onBasinChange(event)}
           >
