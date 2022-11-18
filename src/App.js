@@ -567,9 +567,9 @@ const getStyleBasin =(feature) =>{
 
 
           </Layers>
-          <Controls>
+          {/* <Controls>
             <FullScreenControl />
-          </Controls>
+          </Controls> */}
         </Map>
 
 
