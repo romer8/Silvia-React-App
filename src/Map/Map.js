@@ -9,7 +9,7 @@ const Map = ({ children, zoom, center }) => {
 
 	// on component mount
 	useEffect(() => {
-		console.log("usEffect Map.js");
+		// console.log("usEffect Map.js");
 		let options = {
 			view: new ol.View({ zoom, center }),
 			layers: [],

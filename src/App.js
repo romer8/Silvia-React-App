@@ -205,7 +205,7 @@ const getStyleBasin =(feature) =>{
     const fetchDepartments = async () =>{
       try {
           const {data: response} = await axios.get(service_link_dates);
-          console.log(response)
+          // console.log(response)
           setDepartments(response['departments'])
           setActualDepartment(response['departments'][0])
       } catch (error) {
@@ -224,7 +224,7 @@ const getStyleBasin =(feature) =>{
       const fetchProvinces = async () =>{
         try {
             const {data: response} = await axios.get(service_link_dates);
-            console.log(response)
+            // console.log(response)
             setProvinces(response['provinces'])
             setActualProvince(response['provinces'][0])
         } catch (error) {
@@ -242,7 +242,7 @@ const getStyleBasin =(feature) =>{
       const fetchBasins = async () =>{
         try {
             const {data: response} = await axios.get(service_link_dates);
-            console.log(response)
+            // console.log(response)
             setBasins(response['basin'])
             setActualBasin(response['basin'][0])
         } catch (error) {
@@ -254,7 +254,7 @@ const getStyleBasin =(feature) =>{
     }, [])
 
   useEffect(() => {
-    console.log(actualDepartment)
+    // console.log(actualDepartment)
     const Mydata = {
       'department': actualDepartment
     }
@@ -268,7 +268,7 @@ const getStyleBasin =(feature) =>{
       try {
         
           const {data: response} = await axios.post(service_link,Mydata,config);
-          console.log(response)
+          // console.log(response)
           setDepartmentLayer(response)
           setLoading(false);
           setIsZoomDepartment(true);
@@ -288,7 +288,7 @@ const getStyleBasin =(feature) =>{
 	}, [actualDepartment]);
 
   useEffect(() => {
-    console.log(actualProvince)
+    // console.log(actualProvince)
     const Mydata = {
       'provincia': actualProvince
     }
@@ -302,7 +302,7 @@ const getStyleBasin =(feature) =>{
       try {
         
           const {data: response} = await axios.post(service_link,Mydata,config);
-          console.log(response)
+          // console.log(response)
           setProvinciasLayer(response)
           setLoading(false);
           setIsZoomProvinces(true);
@@ -322,7 +322,7 @@ const getStyleBasin =(feature) =>{
 	}, [actualProvince]);
 
   useEffect(() => {
-    console.log(actualBasin)
+    // console.log(actualBasin)
     const Mydata = {
       'basin': actualBasin
     }
@@ -336,7 +336,7 @@ const getStyleBasin =(feature) =>{
       try {
         
           const {data: response} = await axios.post(service_link,Mydata,config);
-          console.log(response)
+          // console.log(response)
           setBasinLayer(response)
           setLoading(false);
           setIsZoomBasins(true);
@@ -357,14 +357,14 @@ const getStyleBasin =(feature) =>{
 
   // Adding the wms layer to the map
   useEffect(() => {
-    console.log("useEffect app.js 3");
+    // console.log("useEffect app.js 3");
 
     const service_link_dates = 'http://127.0.0.1:8000/apps/silvia/dates/';
 
     const fetchDates = async () =>{
       try {
           const {data: response} = await axios.get(service_link_dates);
-          console.log(response)
+          // console.log(response)
           setDatesFlood(response['dates'])
           setActualDate(response['dates'][0])
       } catch (error) {
@@ -376,7 +376,7 @@ const getStyleBasin =(feature) =>{
   }, [])
 
   useEffect(() => {
-    console.log(actualDate);
+    // console.log(actualDate);
 
     const Mydata = {
       'date': actualDate
@@ -391,8 +391,8 @@ const getStyleBasin =(feature) =>{
       try {
         if(actualDate !==''){
           const {data: response} = await axios.post(service_link,Mydata,config);
-          console.log("useEffect app.js 1");
-          console.log(response)
+          // console.log("useEffect app.js 1");
+          // console.log(response)
           setFloodLayer(response)
           setLoading(false);
           setShowLayer1(true)
@@ -487,7 +487,7 @@ const getStyleBasin =(feature) =>{
               <TileLayer 
                 layerClass={"wms_layer2"}
                 source={new TileWMS({
-                  url: 'https://senamhi.westus2.cloudapp.azure.com/geoserver/peru_hydroviewer/wms',
+                  url: 'https://tethys2.byu.edu/geoserver/peru_hydroviewer/wms',
                   params: { 'LAYERS': 'south_america-peru-geoglows-drainage_line' },
                   serverType: 'geoserver',
                   crossOrigin: 'Anonymous'

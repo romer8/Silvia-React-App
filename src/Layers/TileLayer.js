@@ -8,7 +8,7 @@ const TileLayer = ({ source, opacity, layerClass, zIndex = 0 }) => {
 	const [layer, setLayertile] = useState();
 
 	useEffect(() => {
-		console.log("tilevecote");
+		// console.log("tilevecote");
 		if (!map) return;
 
 		let tileLayer = new OLTileLayer({

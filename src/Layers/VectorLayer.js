@@ -8,7 +8,7 @@ const VectorLayerWrapper = ({ source, style, opacity, zIndex = 0, isZoom, setIsZ
 
 
 	useEffect(() => {
-		console.log("useEffect vectorLayer");
+		// console.log("useEffect vectorLayer");
 		
 		if (!map) return;
 
@@ -44,7 +44,7 @@ const VectorLayerWrapper = ({ source, style, opacity, zIndex = 0, isZoom, setIsZ
 
 		return () => {
 			if (map) {
-				console.log("here removing vector layer")
+				// console.log("here removing vector layer")
 				map.removeLayer(vectorLayerMap);
 				try{
 					setIsZoom(false)

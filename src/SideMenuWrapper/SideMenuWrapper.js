@@ -43,7 +43,7 @@ const SideMenuWrapper = (
 
   const opacityHandler = (data) => {
     deactivateZoom()
-    opacity_wms(data);
+    opacity_wms(Number(data));
   }
   const opacityHandlerEvents = (data) => {
     deactivateZoom()
@@ -207,7 +207,6 @@ const SideMenuWrapper = (
                 menuVariant="dark"
                 title={actual_department}
                 // className="mt-2"
-                block={true}
                 size= 'sm'
                 onSelect={(event) => onDepartmentChange(event)}
                 
