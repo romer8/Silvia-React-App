@@ -19,6 +19,7 @@ import axios from 'axios';
 import {ContainerFlex} from './styles/ContainerMain.styled'
 import SideMenuWrapper from "./SideMenuWrapper/SideMenuWrapper";
 
+const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
 
 const App = () => {
   const modal = useRef(null);
@@ -200,7 +201,7 @@ const getStyleBasin =(feature) =>{
   // Adding the dropdownmenu departments
   useEffect(() => {
 
-    const service_link_dates = 'http://127.0.0.1:8000/apps/silvia/departments/';
+    const service_link_dates = `${API_ENDPOINT}departments/`;
 
     const fetchDepartments = async () =>{
       try {
@@ -219,7 +220,7 @@ const getStyleBasin =(feature) =>{
     // Adding the dropdownmenu provinces
     useEffect(() => {
 
-      const service_link_dates = 'http://127.0.0.1:8000/apps/silvia/provincias/';
+      const service_link_dates = `${API_ENDPOINT}provincias/`;
   
       const fetchProvinces = async () =>{
         try {
@@ -237,7 +238,7 @@ const getStyleBasin =(feature) =>{
     // Adding the dropdownmenu basins
     useEffect(() => {
 
-      const service_link_dates = 'http://127.0.0.1:8000/apps/silvia/basins/';
+      const service_link_dates = `${API_ENDPOINT}basins/`;
   
       const fetchBasins = async () =>{
         try {
@@ -263,7 +264,7 @@ const getStyleBasin =(feature) =>{
         "Content-Type": "application/json",
       },
     };
-    const service_link = 'http://127.0.0.1:8000/apps/silvia/departments-json/';
+    const service_link = `${API_ENDPOINT}departments-json/`;
     const fetchDepartmentJSON = async () =>{
       try {
         
@@ -297,7 +298,7 @@ const getStyleBasin =(feature) =>{
         "Content-Type": "application/json",
       },
     };
-    const service_link = 'http://127.0.0.1:8000/apps/silvia/provincias-json/';
+    const service_link = `${API_ENDPOINT}provincias-json/`;
     const fetchProvinciasJSON = async () =>{
       try {
         
@@ -331,7 +332,7 @@ const getStyleBasin =(feature) =>{
         "Content-Type": "application/json",
       },
     };
-    const service_link = 'http://127.0.0.1:8000/apps/silvia/basin-json/';
+    const service_link = `${API_ENDPOINT}basin-json/`;
     const fetchBasinJSON = async () =>{
       try {
         
@@ -359,7 +360,7 @@ const getStyleBasin =(feature) =>{
   useEffect(() => {
     // console.log("useEffect app.js 3");
 
-    const service_link_dates = 'http://127.0.0.1:8000/apps/silvia/dates/';
+    const service_link_dates = `${API_ENDPOINT}dates/`;
 
     const fetchDates = async () =>{
       try {
@@ -386,7 +387,7 @@ const getStyleBasin =(feature) =>{
         "Content-Type": "application/json",
       },
     };
-    const service_link = 'http://127.0.0.1:8000/apps/silvia/floods/';
+    const service_link = `${API_ENDPOINT}floods/`;
     const fetchDataFlood = async () =>{
       try {
         if(actualDate !==''){
