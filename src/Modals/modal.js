@@ -33,9 +33,9 @@ export function Modal({ children, fade = false, defaultOpened = false }, ref) {
         <ModalDisclaimer>
         <div className={`modal2 ${fade ? 'modal-fade2' : ''}`}>
             <div className="modal-overlay2" onClick={close} />
-            <span role="button" className="modal-close2" aria-label="close" onClick={close}>
+            {/* <span role="button" className="modal-close2" aria-label="close" onClick={close}>
             x
-            </span>
+            </span> */}
             <div className="modal-body2">{children}</div>
         </div>
         </ModalDisclaimer>
