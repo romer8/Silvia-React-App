@@ -19,7 +19,7 @@ import axios from 'axios';
 import {ContainerFlex} from './styles/ContainerMain.styled'
 import SideMenuWrapper from "./SideMenuWrapper/SideMenuWrapper";
 
-const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT
+const API_ENDPOINT = process.env.REACT_APP_API_ENDPOINT || '';
 
 const App = () => {
   const modal = useRef(null);
