@@ -31,7 +31,7 @@ const TileLayer = ({ source, opacity, layerClass, zIndex = 0 }) => {
 	useEffect(() => {
 
 		if (!layer) return;
-		var layer_prop = map.getLayers().getArray().find(layer => layer.get('name') == layerClass);
+		var layer_prop = map.getLayers().getArray().find(layer => layer.get('name') === layerClass);
 		layer_prop.setOpacity(Number(opacity))
 				  
 	}, [opacity]);
